@@ -13,7 +13,7 @@ class Student extends Eloquent
 	
 	public function Assignment()
 	{
-		return $this->hasOne('Assignment', 'id', 'Project_id');
+		return $this->hasOne('Project', 'id', 'ProjectID');
 	}
 	
 }

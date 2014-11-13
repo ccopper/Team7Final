@@ -1,0 +1,101 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1454" measuredH="773" mockupW="1024" mockupH="768">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="430" y="5" w="1024" h="768" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>CSCI370%0Ahttp%3A//url.mines.edu</text>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="547" y="127" w="376" h="-1" measuredW="167" measuredH="40" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <size>32</size>
+        <text>Admin%20View</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="547" y="212" w="153" h="-1" measuredW="110" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>C%3A%5CStudents.csv</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="547" y="191" w="153" h="-1" measuredW="124" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Student%20CSV%20Upload</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="636" y="248" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Upload</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="547" y="248" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Browse</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::List" x="1097" y="212" w="179" h="202" measuredW="100" measuredH="216" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Student%20%20%231%0AStudent%20%20%232%0AStudent%20%20%233%0AStudent%20%20%234%0AStudent%20%20%235%0AStudent%20%20%236%0AStudent%20%20%237%0AStudent%20%20%238%0AStudent%20%20%239%0AStudent%20%20%2310</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Button" x="551" y="429" w="-1" h="-1" measuredW="149" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>AutoGenerate%20Groups</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="547" y="387" w="153" h="-1" measuredW="46" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Groups%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="566" y="408" w="-1" h="-1" measuredW="114" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>No%20Groups%20Created</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="1097" y="191" w="-1" h="-1" measuredW="108" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Enrolled%20Students%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Button" x="1123" y="423" w="126" h="27" measuredW="101" measuredH="27" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%20Student</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::TextInput" x="547" y="311" w="153" h="-1" measuredW="106" measuredH="27" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>C%3A%5CProjects.csv</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="547" y="290" w="153" h="-1" measuredW="119" measuredH="21" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Project%20CSV%20Upload</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Button" x="636" y="347" w="-1" h="-1" measuredW="64" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Upload</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Button" x="547" y="347" w="-1" h="-1" measuredW="65" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Browse</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::List" x="754" y="212" w="328" h="202" measuredW="100" measuredH="126" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Newmont%20Mining%20-%20Newmont%20Mining%20Redux%0ACSM%20-%20Laser%20Shark%20Guidence%0ACSM%20-%20Kinect%20System%20Round%2010%0ALockheed%20-%20Missle%20Defense%20System</text>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Label" x="754" y="191" w="228" h="-1" measuredW="52" measuredH="21" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Projects%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="18" controlTypeID="com.balsamiq.mockups::Button" x="869" y="423" w="99" h="27" measuredW="97" measuredH="27" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%20Project</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

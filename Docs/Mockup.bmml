@@ -1,0 +1,15 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="954" measuredH="499" mockupW="924" mockupH="483">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="30" y="16" w="-1" h="-1" measuredW="924" measuredH="483" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <src>./assets/Schema.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Paragraph" x="705" y="233" w="193" h="142" measuredW="275" measuredH="80" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Jeremiah%20Jekich%0AChris%20Copper%0ADaniel%20Jost%0ATeam%20%2307</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
