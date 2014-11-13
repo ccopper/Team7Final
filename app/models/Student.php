@@ -2,9 +2,15 @@
 
 class Student extends Eloquent
 {
-	protected $table = 'Students';
-	protected $fillable = array('CWID', 'FirstName', 'LastName', 'EMail', 'Major','Minor', 'OtherInfo', 'PreferProjects');
-	protected $timestamps = false;
+	public $table = 'Students';
+	protected $primaryKey = 'CWID';
+	public $fillable = array('CWID', 'FirstName', 'LastName', 'EMail', 'Major','Minor', 'OtherInfo', 'PreferProjects');
+	public $timestamps = false;
+	
+	public function PrePartners()
+	{
+		return $this->belongsToMany('Students', 'Students_Preferred', 'CWID', 'ProjectID');
+	}
 	
 	public function Projects()
 	{

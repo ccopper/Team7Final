@@ -15,3 +15,14 @@ Route::get('/', function()
 {
 	return View::make('Login');
 });
+
+Route::post('/Login', function()
+{
+	if(Auth::attempt(array('UserName'=>Input::get('UserName'), 'password'=>Input::get('Password')))) 
+	{
+		return View::make('StudentInfo')->with('student', Auth::user()->Student);
+	} else 
+	{
+		return View::make('Login');
+	}
+});

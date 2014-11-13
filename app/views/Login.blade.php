@@ -16,7 +16,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Password</label>
 		<div class="col-sm-10">
-			<input type="text" name="PassWord" class="form-control"></input>
+			<input type="password" name="Password" class="form-control"></input>
 		</div>
 	</div>
 
@@ -27,7 +27,5 @@
 	</div>
 	</form>
 
-     
 
-    </div>
 @stop

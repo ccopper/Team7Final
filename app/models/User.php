@@ -9,9 +9,9 @@ class User extends Eloquent implements UserInterface {
 
 	use UserTrait, RemindableTrait;
 
-	protected $table = 'Users';
-	protected $timestamps = false;
-	protected $hidden = array('password', 'remember_token');
+	public $table = 'Users';
+	public $timestamps = false;
+	public $hidden = array('Password');
 
 	public function getAuthIdentifier() 
 	{
@@ -20,12 +20,12 @@ class User extends Eloquent implements UserInterface {
 	
 	public function getAuthPassword() 
 	{
-		return $this->password;
+		return $this->Password;
 	}
 
 	public function Student()
 	{
-		return $this->hasMany('Student');
+		return $this->hasOne('Student', 'CWID', 'CWID');
 	}
 	
 	public function owns(Student $s)

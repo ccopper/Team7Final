@@ -19,6 +19,7 @@ class BuildSchema extends Migration {
 			$table->string('Password');
 			$table->string('EMail');
 			$table->integer('PermissionLevel');
+			$table->string('remember_token')->nullable();
 			
 			$table->primary('CWID');
 		});
@@ -28,11 +29,11 @@ class BuildSchema extends Migration {
 			$table->string('FirstName');
 			$table->string('LastName');
 			$table->string('EMail');
-			$table->string('Major');
-			$table->string('Minor');
-			$table->string('OtherInfo');
-			$table->integer('PreferProjects');
-			$table->integer('ProjectID');
+			$table->string('Major')->nullable();
+			$table->string('Minor')->nullable();
+			$table->string('OtherInfo')->nullable();
+			$table->integer('PreferProjects')->default(1);
+			$table->integer('ProjectID')->nullable();
 			
 			$table->primary('CWID');
 		});
