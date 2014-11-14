@@ -75,10 +75,7 @@ function findStudents_success(respData)
 		{
 			text: respData[v].FirstName + " " + respData[v].LastName,
 			data: { CWID: respData[v].CWID},
-			click: function()
-			{
-				
-			}
+			click: preferStudent
 		}));
 	}
 }
@@ -86,18 +83,44 @@ function findStudents_success(respData)
 function preferStudent()
 {
 	$.ajax({
-		type: 'POST',
-        url: "Student/Find",
-		data:
-		{
-			"Name": $("#newPre").val().trim()
-		},
+		type: 'GET',
+        url: "Student/Prefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
         dataType: "json", 
-		success: findStudents_success,
+		success: preferStudent_success,
 		error: ajaxError
 		
 	});
 }
+function preferStudent_success(respData)
+{
+	console.log(respData);
+	$("#newPre").val("");
+	$("#studentList").hide();
+	
+	$("#PrePartList").append(
+		"<tr id=\"" + respData.CWID + "\">" +
+		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
+		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\">-</button></td><tr>"
+	);
+}
+
+function unPreferStudent()
+{
+	$.ajax({
+		type: 'GET',
+        url: "Student/UnPrefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
+        dataType: "json", 
+		success: unPreferStudent_success,
+		error: ajaxError
+		
+	});
+}
+function unPreferStudent_success(respData)
+{
+	console.log(respData);
+
+}
+
 
 
 

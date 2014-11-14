@@ -2,4 +2,5 @@
 #studentList li:hover
 {
 	background-color: #DDDDDD;
+	cursor: pointer;
 }

@@ -78,6 +78,7 @@ class BuildSchema extends Migration {
 	public function down()
 	{
 		Schema::dropIfExists('Users');
+		Schema::dropIfExists('Projects');
 		Schema::dropIfExists('Students');
 		Schema::dropIfExists('Students_Projects');
 		Schema::dropIfExists('Students_Avoid');

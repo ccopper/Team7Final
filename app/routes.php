@@ -71,7 +71,12 @@ Route::post('/Student/Find', function ()
 Route::get('/Student/Prefer/{id}/{pid}', function($id, $pid)
 {
 	$s = Student::find($id);
-		
+	
+	if($id == $pid)
+	{
+		return;
+	}
+	
 	if(! (Auth::check())) 
 	{
 		return "{ \"errCode\": 1 }";
@@ -82,6 +87,30 @@ Route::get('/Student/Prefer/{id}/{pid}', function($id, $pid)
 	} 
 
 	$s->PrePartners()->attach($pid);
+	
+	return Student::find($pid)->toJson();
+	
+});
+
+Route::get('/Student/UnPrefer/{id}/{pid}', function($id, $pid)
+{
+	$s = Student::find($id);
+	
+	if($id == $pid)
+	{
+		return;
+	}
+	
+	if(! (Auth::check())) 
+	{
+		return "{ \"errCode\": 1 }";
+	} 
+	if(!Auth::user()->canEdit($s))
+	{
+		return "{ \"errCode\": 2 }";
+	} 
+
+	$s->PrePartners()->detach($pid);
 	
 	return "{ \"errCode\": 0 }";
 	
