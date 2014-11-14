@@ -4,7 +4,7 @@ class UserSeeder extends Seeder
 	public function run()
 	{
 
-		$file = fopen("students.csv", "r");
+		$file = fopen("Students.csv", "r");
 		//First line is junk Skip
 		$line = fgetcsv($file, 1024, ",");
 		while (!feof($file)) 

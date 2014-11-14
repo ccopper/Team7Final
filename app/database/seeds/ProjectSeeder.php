@@ -3,7 +3,7 @@ class ProjectSeeder extends Seeder
 {
 	public function run()
 	{
-		$file = fopen("projects.csv", "r");
+		$file = fopen("Projects.csv", "r");
 		$line = fgetcsv($file, 1024, ",");
 		while (!feof($file)) {
 			$line = fgetcsv($file, 1024, ",");
