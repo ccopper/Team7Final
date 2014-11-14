@@ -1,7 +1,7 @@
 @extends('master')
 @section('include')
-<link rel="stylesheet" href="StudentInfo.css">
-<script src="StudentInfo.js"></script>
+	<link rel="stylesheet" href="StudentInfo.css">
+	<script src="StudentInfo.js"></script>
 @stop
 @section('header')
 	<h2>
@@ -36,9 +36,11 @@
 				<caption>Preferred Partners</caption>
 				<tbody id="PrePartList">
 					@foreach($student->PrePartners as $pp)
-						<tr id="{{ $pp->CWID }}}">
+						<tr id="P{{{ $pp->CWID }}}">
 							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
-							<td class="col-md-2"><button type="button" class="btn btn-primary">-</button></td>
+							<td class="col-md-2">
+								<button type="button" class="btn btn-primary" value="{{{ $pp->CWID }}}">-</button>
+							</td>
 						<tr>
 					@endforeach
 				</tbody>
@@ -47,33 +49,37 @@
 			<div class="row">
 
 				<input id="newPre" type="text" name="NewPre" class="form-control"></input>
-				<div id="studentList" style="display: none; border: 1px solid black;">
-					<ul class="list-unstyled" style="margin: 10px"></ul>
+				<div id="PreferSuggest" class="SuggestList">
+					<ul id="PreferSuggestUL" class="list-unstyled" style="margin: 10px"></ul>
 				</div>
 			</div>
 			<br>
 			<table class="table table-condensed">
 				<caption>Avoid Partners</caption>
-				<tbody id="PrePartList">
+				<tbody id="AvoidPartList">
 					@foreach($student->AvoidPartners as $pp)
-						<tr id="{{ $pp->CWID }}}">
+						<tr id="A{{{ $pp->CWID }}}">
 							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
-							<td class="col-md-2"><button type="button" class="btn btn-primary">-</button></td>
+							<td class="col-md-2">
+								<button type="button" class="btn btn-primary" value="{{{ $pp->CWID }}}">-</button>
+							</td>
 						<tr>
 					@endforeach
 				</tbody>
 			</table>
 			<div class="row">
 
-				<input type="text" name="NewAvoid" class="form-control"></input>
-
+				<input id="newAvoid" type="text" name="newAvoid" class="form-control"></input>
+				<div id="AvoidSuggest" class="SuggestList" >
+					<ul class="list-unstyled" style="margin: 10px"></ul>
+				</div>
 			</div>
 			
 		</div>
 		<div class="col-md-5">
 			<table class="table">
 				<caption>Preferred Projects</caption>
-				<tbody id="PrePartList">
+				<tbody id="PreProjList">
 					@foreach($student->Projects as $pp)
 						<tr><td>{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td><tr>
 					@endforeach

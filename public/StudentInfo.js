@@ -16,7 +16,26 @@ $( document ).ready(function()
 	$("#ppInp1").change(updateSI);
 	$("#ppInp2").change(updateSI);
 	
-	$("#newPre").on('input', findStudents);
+	$("#newPre").data("list", $("#PreferSuggest"));
+	$("#PreferSuggest").on('click', 'li', preferStudent);
+	
+	$("#newAvoid").data("list", $("#AvoidSuggest"));
+	$("#AvoidSuggest").on('click', 'li', avoidStudent);
+	
+	$("#newPre").on('input',findStudents);
+	$("#newAvoid").on('input', findStudents);
+	
+	/*$("#newPre").focusout(function()
+	{
+		$("#PreferSuggest").hide();
+	});
+	$("#newAvoid").focusout(function()
+	{
+		$("#AvoidSuggest").hide();
+	});*/
+	
+	$("#PrePartList").on("click", "button" , unPreferStudent);
+	$("#AvoidPartList").on("click", "button" , unPreferStudent);
 });
 
 
@@ -44,44 +63,49 @@ function updateSI_success(respData)
 
 function findStudents()
 {
-	if($("#newPre").val().trim() == "")
+	if($(this).val().trim() == "")
 	{
-		$("#studentList").hide();
+		$(this).data("list").hide();
 		return;
 	}
-
+	var input = $(this);
 	$.ajax({
 		type: 'POST',
         url: "Student/Find",
 		data:
 		{
-			"Name": $("#newPre").val().trim()
+			"Name": $(this).val().trim()
 		},
         dataType: "json", 
-		success: findStudents_success,
+		success: function(respData)
+		{
+			findStudents_success(input ,respData);
+		},
 		error: ajaxError
 		
 	});
 }
 
-function findStudents_success(respData)
+function findStudents_success(input, respData)
 {
-	$("#studentList ul").empty();
-	$("#studentList").show();
+	console.log(respData);
+	input.data("list").children("ul").empty();
+	input.data("list").show();
 
 	for(var v in respData)
 	{
-		$("#studentList ul").append($("<li>", 
+		input.data("list").children("ul").append($("<li>", 
 		{
 			text: respData[v].FirstName + " " + respData[v].LastName,
-			data: { CWID: respData[v].CWID},
-			click: preferStudent
+			data: { CWID: respData[v].CWID},	
 		}));
+		
 	}
 }
 
 function preferStudent()
 {
+	console.log("Here");
 	$.ajax({
 		type: 'GET',
         url: "Student/Prefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
@@ -95,12 +119,36 @@ function preferStudent_success(respData)
 {
 	console.log(respData);
 	$("#newPre").val("");
-	$("#studentList").hide();
+	$("#PreferSuggest").hide();
 	
 	$("#PrePartList").append(
-		"<tr id=\"" + respData.CWID + "\">" +
+		"<tr id=\"P" + respData.CWID + "\">" +
 		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
-		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\">-</button></td><tr>"
+		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td><tr>"
+	);
+}
+
+function avoidStudent()
+{
+	$.ajax({
+		type: 'GET',
+        url: "Student/Avoid/" + $("#CWID").text() + "/" + $(this).data("CWID"),
+        dataType: "json", 
+		success: avoidStudent_success,
+		error: ajaxError
+		
+	});
+}
+function avoidStudent_success(respData)
+{
+	console.log(respData);
+	$("#newAvoid").val("");
+	$("#AvoidSuggest").hide();
+	
+	$("#AvoidPartList").append(
+		"<tr id=\"P" + respData.CWID + "\">" +
+		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
+		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td><tr>"
 	);
 }
 
@@ -108,7 +156,7 @@ function unPreferStudent()
 {
 	$.ajax({
 		type: 'GET',
-        url: "Student/UnPrefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
+        url: "Student/UnPrefer/" + $("#CWID").text() + "/" + $(this).val(),
         dataType: "json", 
 		success: unPreferStudent_success,
 		error: ajaxError
@@ -118,10 +166,25 @@ function unPreferStudent()
 function unPreferStudent_success(respData)
 {
 	console.log(respData);
-
+	$("#P" + respData.CWID).remove();
 }
 
-
+function unAvoidStudent()
+{
+	$.ajax({
+		type: 'GET',
+        url: "Student/UnAvoid/" + $("#CWID").text() + "/" + $(this).val(),
+        dataType: "json", 
+		success: unAvoidStudent_success,
+		error: ajaxError
+		
+	});
+}
+function unAvoidStudent_success(respData)
+{
+	console.log(respData);
+	$("#A" + respData.CWID).remove();
+}
 
 
 function ajaxError(qXHR, textStatus, errorThrown)

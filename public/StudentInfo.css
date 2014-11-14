@@ -1,5 +1,12 @@
 
-#studentList li:hover
+.SuggestList
+{
+	display: none; 
+	border: 1px solid black;
+}
+
+
+.SuggestList li:hover
 {
 	background-color: #DDDDDD;
 	cursor: pointer;
