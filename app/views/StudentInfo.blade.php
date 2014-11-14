@@ -11,9 +11,13 @@
 @section('content')
 	<span id="CWID" style="display: none">{{{ $student->CWID }}}</span>
 	
-	
 	<div class="row">
 		<div class="col-md-3">
+			<div class="alert alert-danger" role="alert" style="display:none" id="UnsavedAlert">
+				<span id="unsavedAlert" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only"></span>
+				Unsaved Changes
+			</div>
 			<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">
 			<h3>{{{ $student->FirstName }}} {{{ $student->LastName }}}</h3>
 			<br>

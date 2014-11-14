@@ -16,6 +16,13 @@ $( document ).ready(function()
 	$("#ppInp1").change(updateSI);
 	$("#ppInp2").change(updateSI);
 	
+	$("#majInp").on('input', showUnsaved);
+	$("#minInp").on('input', showUnsaved);
+	$("#oiInp").on('input', showUnsaved);
+	$("#ppInp1").on('input', showUnsaved);
+	$("#ppInp2").on('input', showUnsaved);
+	
+	
 	$("#newPre").data("list", $("#PreferSuggest"));
 	$("#PreferSuggest").on('click', 'li', preferStudent);
 	
@@ -25,19 +32,14 @@ $( document ).ready(function()
 	$("#newPre").on('input',findStudents);
 	$("#newAvoid").on('input', findStudents);
 	
-	/*$("#newPre").focusout(function()
-	{
-		$("#PreferSuggest").hide();
-	});
-	$("#newAvoid").focusout(function()
-	{
-		$("#AvoidSuggest").hide();
-	});*/
-	
 	$("#PrePartList").on("click", "button" , unPreferStudent);
 	$("#AvoidPartList").on("click", "button" , unPreferStudent);
 });
 
+function showUnsaved()
+{
+	$("#UnsavedAlert").show();
+}
 
 function updateSI()
 {
@@ -59,6 +61,7 @@ function updateSI()
 function updateSI_success(respData)
 {
 	console.log(respData);
+	$("#UnsavedAlert").hide();
 }
 
 function findStudents()
