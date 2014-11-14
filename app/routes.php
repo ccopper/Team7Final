@@ -20,6 +20,10 @@ Route::post('/Login', function()
 {
 	if(Auth::attempt(array('UserName'=>Input::get('UserName'), 'password'=>Input::get('Password')))) 
 	{
+		if(Auth::user()->PermissionLevel > 1)
+		{
+			return View::make('StudentInfo')->with('student', Student::All()->first());
+		}
 		return View::make('StudentInfo')->with('student', Auth::user()->Student);
 	} else 
 	{
