@@ -1,45 +1,106 @@
 @extends('master')
+@section('include')
+<link rel="stylesheet" href="StudentInfo.css">
+<script src="StudentInfo.js"></script>
+@stop
 @section('header')
 	<h2>
 		Student Infomation
 	</h2>
 @stop
 @section('content')
-<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">
+	<span id="CWID" style="display: none">{{{ $student->CWID }}}</span>
+	
+	
 	<div class="row">
 		<div class="col-md-3">
+			<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">
 			<h3>{{{ $student->FirstName }}} {{{ $student->LastName }}}</h3>
 			<br>
 			{{{ $student->EMail }}}
 			<br><br>
-			Major: <input type="text" name="Major" class="form-control">{{{ $student->Major }}}</input>
+			Major: <input id="majInp" type="text" name="Major" class="form-control" value="{{{ $student->Major }}}"></input>
 			<br>
-			Minor: <input type="text" name="Major" class="form-control">{{{ $student->Minor }}}</input>
+			Minor: <input id="minInp" type="text" name="Minor" class="form-control" value="{{{ $student->Minor }}}"></input>
 			<br>
 			Additional Information:
 			<br>
-			<textarea name="Quote" class="form-control">
+			<textarea id="oiInp" name="OtherInfo" class="form-control">
 			{{{ $student->OtherInfo }}}
 			</textarea>
-			
+			</form>
 		</div>
-		<div class="col-md-4" style="border:1px solid black">
-			<table class="table">
+		<div class="col-md-4">
+			<table class="table table-condensed">
+			
 				<caption>Preferred Partners</caption>
 				<tbody id="PrePartList">
-					@foreach($genres as $genre)
-						<option value="{{{$genre->id}}}">{{{$genre->Name}}}</option>
+					@foreach($student->PrePartners as $pp)
+						<tr id="{{ $pp->CWID }}}">
+							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
+							<td class="col-md-2"><button type="button" class="btn btn-primary">-</button></td>
+						<tr>
+					@endforeach
+				</tbody>
+				
+			</table>
+			<div class="row">
+
+				<input id="newPre" type="text" name="NewPre" class="form-control"></input>
+				<div id="studentList" style="display: none; border: 1px solid black;">
+					<ul class="list-unstyled" style="margin: 10px"></ul>
+				</div>
+			</div>
+			<br>
+			<table class="table table-condensed">
+				<caption>Avoid Partners</caption>
+				<tbody id="PrePartList">
+					@foreach($student->AvoidPartners as $pp)
+						<tr id="{{ $pp->CWID }}}">
+							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
+							<td class="col-md-2"><button type="button" class="btn btn-primary">-</button></td>
+						<tr>
 					@endforeach
 				</tbody>
 			</table>
+			<div class="row">
+
+				<input type="text" name="NewAvoid" class="form-control"></input>
+
+			</div>
+			
 		</div>
-		<div class="col-md-5" style="border:1px solid black">
-			Preferred Projects:
+		<div class="col-md-5">
+			<table class="table">
+				<caption>Preferred Projects</caption>
+				<tbody id="PrePartList">
+					@foreach($student->Projects as $pp)
+						<tr><td>{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td><tr>
+					@endforeach
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col-md-10">
+					<input type="text" name="NewAvoid" class="form-control"></input>
+				</div>
+				<div class="col-md-2">
+					<button type="button" class="btn btn-primary" id="addAvoid">Add</button>
+				</div>
+			</div>
+			<div class="radio">
+				<label>
+					<input id="ppInp1" type="radio" name="PreferProjects" value="0" {{{ (($student->PreferProjects == 0)? "checked": "") }}}>
+					Prefer to work with listed partners
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input id="ppInp2" type="radio" name="PreferProjects" value="1" {{{ (($student->PreferProjects == 1)? "checked": "") }}}>
+					Prefer to work on listed projects
+				</label>
+			</div>
+			
+			
 		</div>
 	</div>
-
-</form>	
-	
-	
-
 @stop

@@ -9,12 +9,16 @@ class Student extends Eloquent
 	
 	public function PrePartners()
 	{
-		return $this->belongsToMany('Students', 'Students_Preferred', 'CWID', 'ProjectID');
+		return $this->belongsToMany('Student', 'Students_Prefer', 'CWID', 'CWID_Prefer');
 	}
 	
+	public function AvoidPartners()
+	{
+		return $this->belongsToMany('Student', 'Students_Avoid', 'CWID', 'CWID_Avoid');
+	}
 	public function Projects()
 	{
-		return $this->belongsToMany('Projects', 'Students_Projects', 'CWID', 'ProjectID');
+		return $this->belongsToMany('Project', 'Students_Projects', 'CWID', 'ProjectID');
 	}
 	
 	public function Assignment()

@@ -12,6 +12,7 @@ class User extends Eloquent implements UserInterface {
 	public $table = 'Users';
 	public $timestamps = false;
 	public $hidden = array('Password');
+	protected $primaryKey = 'CWID';
 
 	public function getAuthIdentifier() 
 	{
