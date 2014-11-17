@@ -1,7 +1,7 @@
 @extends('master')
 @section('include')
-	<link rel="stylesheet" href="/Team7Final/public/StudentInfo.css">
-	<script src="/Team7Final/public/StudentInfo.js"></script>
+	{{ HTML::style('public/StudentInfo.css') }}
+    {{ HTML::script('public/StudentInfo.js') }}
 @stop
 @section('header')
 	<h2>
