@@ -1,7 +1,7 @@
 @extends('master')
 @section('include')
-	<link rel="stylesheet" href="StudentInfo.css">
-	<script src="StudentInfo.js"></script>
+	<link rel="stylesheet" href="/Team7Final/public/StudentInfo.css">
+	<script src="/Team7Final/public/StudentInfo.js"></script>
 @stop
 @section('header')
 	<h2>
@@ -43,7 +43,7 @@
 						<tr id="P{{{ $pp->CWID }}}">
 							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
 							<td class="col-md-2">
-								<button type="button" class="btn btn-primary" value="{{{ $pp->CWID }}}">-</button>
+								<button type="button" value="{{{ $pp->CWID }}}">-</button>
 							</td>
 						<tr>
 					@endforeach
@@ -65,7 +65,7 @@
 						<tr id="A{{{ $pp->CWID }}}">
 							<td class="col-md-10">{{{ $pp->FirstName }}} {{{ $pp->LastName }}}</td>
 							<td class="col-md-2">
-								<button type="button" class="btn btn-primary" value="{{{ $pp->CWID }}}">-</button>
+								<button type="button" value="{{{ $pp->CWID }}}">-</button>
 							</td>
 						<tr>
 					@endforeach
@@ -81,20 +81,35 @@
 			
 		</div>
 		<div class="col-md-5">
-			<table class="table">
+			
+			<table class="table table-condensed">
 				<caption>Preferred Projects</caption>
 				<tbody id="PreProjList">
-					@foreach($student->Projects as $pp)
-						<tr><td>{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td><tr>
+					@foreach($student->ProjectSelections as $pp)
+						<tr>
+							<td class="col-md-2">{{{ $pp->pivot->Priority }}}</td>
+							<td class="col-md-8">{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td>
+							<td class="col-md-2"><button type="button" value="{{{ $pp->ProjectID}}}">-</button></td>
+							<tr>
 					@endforeach
 				</tbody>
 			</table>
 			<div class="row">
 				<div class="col-md-10">
-					<input type="text" name="NewAvoid" class="form-control"></input>
+					<select id="newProjID" name="newProj" class="form-control">
+					@foreach($projects as $pp)
+						<option value="{{{ $pp->id }}}">{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</option>
+					@endforeach
+					</select>
 				</div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-primary" id="addAvoid">Add</button>
+					<input type="number" id="newProjPri" name="Priority" class="form-control" min="1" max="4" value="1"></input>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="col-md-2 col-md-offset-5">
+					<button type="button" class="btn btn-primary" id="addProject">Add</button>
 				</div>
 			</div>
 			<div class="radio">

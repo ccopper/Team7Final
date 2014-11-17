@@ -34,6 +34,8 @@ $( document ).ready(function()
 	
 	$("#PrePartList").on("click", "button" , unPreferStudent);
 	$("#AvoidPartList").on("click", "button" , unPreferStudent);
+	
+	$("#addProject").on("click", addProject);
 });
 
 function showUnsaved()
@@ -45,7 +47,7 @@ function updateSI()
 {
 	$.ajax({
 		type: 'POST',
-        url: "Student/Update/" + $("#CWID").text(),
+        url: "Update/" + $("#CWID").text(),
 		data: 
 		{ 
 			"fieldName": $(this).attr("name"),
@@ -74,7 +76,7 @@ function findStudents()
 	var input = $(this);
 	$.ajax({
 		type: 'POST',
-        url: "Student/Find",
+        url: "Find",
 		data:
 		{
 			"Name": $(this).val().trim()
@@ -111,7 +113,7 @@ function preferStudent()
 	console.log("Here");
 	$.ajax({
 		type: 'GET',
-        url: "Student/Prefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
+        url: "Prefer/" + $("#CWID").text() + "/" + $(this).data("CWID"),
         dataType: "json", 
 		success: preferStudent_success,
 		error: ajaxError
@@ -127,7 +129,7 @@ function preferStudent_success(respData)
 	$("#PrePartList").append(
 		"<tr id=\"P" + respData.CWID + "\">" +
 		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
-		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td><tr>"
+		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td></tr>"
 	);
 }
 
@@ -135,7 +137,7 @@ function avoidStudent()
 {
 	$.ajax({
 		type: 'GET',
-        url: "Student/Avoid/" + $("#CWID").text() + "/" + $(this).data("CWID"),
+        url: "Avoid/" + $("#CWID").text() + "/" + $(this).data("CWID"),
         dataType: "json", 
 		success: avoidStudent_success,
 		error: ajaxError
@@ -151,7 +153,7 @@ function avoidStudent_success(respData)
 	$("#AvoidPartList").append(
 		"<tr id=\"P" + respData.CWID + "\">" +
 		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
-		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td><tr>"
+		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td></tr>"
 	);
 }
 
@@ -159,7 +161,7 @@ function unPreferStudent()
 {
 	$.ajax({
 		type: 'GET',
-        url: "Student/UnPrefer/" + $("#CWID").text() + "/" + $(this).val(),
+        url: "UnPrefer/" + $("#CWID").text() + "/" + $(this).val(),
         dataType: "json", 
 		success: unPreferStudent_success,
 		error: ajaxError
@@ -176,7 +178,7 @@ function unAvoidStudent()
 {
 	$.ajax({
 		type: 'GET',
-        url: "Student/UnAvoid/" + $("#CWID").text() + "/" + $(this).val(),
+        url: "UnAvoid/" + $("#CWID").text() + "/" + $(this).val(),
         dataType: "json", 
 		success: unAvoidStudent_success,
 		error: ajaxError
@@ -189,6 +191,35 @@ function unAvoidStudent_success(respData)
 	$("#A" + respData.CWID).remove();
 }
 
+function addProject()
+{
+	$.ajax({
+		type: 'GET',
+        url: "ProjectSelect/" + $("#CWID").text() + "/" + $("#newProjID").val() + "/" + $("#newProjPri").val(),
+        dataType: "json", 
+		success: addProject_success,
+		error: ajaxError
+		
+	});
+
+}
+
+function addProject_success(respData)
+{
+	console.log(respData);
+	$("#PreProjList").empty();
+	for(var v in respData)
+	{
+		console.log(respData[v]);
+		$("#PreProjList").append(
+			"<tr>" +
+			"<td class=\"col-md-2\">" + respData[v].pivot.Priority + "</td>" +
+			"<td class=\"col-md-8\">" + respData[v].Company + " " + respData[v].ProjectName + "</td>" +
+			"<td class=\"col-md-2\"><button type=\"button\" value=\""+ respData[v].ProjectID +"\">-</button></td>"+
+			"</tr>"
+		);
+	}
+}
 
 function ajaxError(qXHR, textStatus, errorThrown)
 {

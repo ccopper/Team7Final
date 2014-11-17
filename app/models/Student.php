@@ -16,9 +16,9 @@ class Student extends Eloquent
 	{
 		return $this->belongsToMany('Student', 'Students_Avoid', 'CWID', 'CWID_Avoid');
 	}
-	public function Projects()
+	public function ProjectSelections()
 	{
-		return $this->belongsToMany('Project', 'Students_Projects', 'CWID', 'ProjectID');
+		return $this->belongsToMany('Project', 'Students_Projects', 'CWID', 'ProjectID')->withPivot('Priority')->orderBy('Priority','asc');
 	}
 	
 	public function Assignment()
