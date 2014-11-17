@@ -1,7 +1,7 @@
 @extends('master')
 @section('include')
-	{{ HTML::style('public/StudentInfo.css') }}
-    {{ HTML::script('public/StudentInfo.js') }}
+	{{ HTML::style('StudentInfo.css') }}
+    {{ HTML::script('StudentInfo.js') }}
 @stop
 @section('header')
 	<h2>
