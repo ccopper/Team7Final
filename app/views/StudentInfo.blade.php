@@ -13,11 +13,6 @@
 	
 	<div class="row">
 		<div class="col-md-3">
-			<div class="alert alert-danger" role="alert" style="display:none" id="UnsavedAlert">
-				<span id="unsavedAlert" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-				<span class="sr-only"></span>
-				Unsaved Changes
-			</div>
 			<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">
 			<h3>{{{ $student->FirstName }}} {{{ $student->LastName }}}</h3>
 			<br>
@@ -33,6 +28,11 @@
 			{{{ $student->OtherInfo }}}
 			</textarea>
 			</form>
+			<div class="alert alert-danger" role="alert" style="display:none" id="UnsavedAlert">
+				<span id="unsavedAlert" class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<span class="sr-only"></span>
+				Unsaved Changes
+			</div>
 		</div>
 		<div class="col-md-4">
 			<table class="table table-condensed">
@@ -88,8 +88,8 @@
 					@foreach($student->ProjectSelections as $pp)
 						<tr>
 							<td class="col-md-2">{{{ $pp->pivot->Priority }}}</td>
-							<td class="col-md-8">{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td>
-							<td class="col-md-2"><button type="button" value="{{{ $pp->ProjectID}}}">-</button></td>
+							<td class="col-md-10">{{{ $pp->Company }}} {{{ $pp->ProjectName }}}</td>
+							<!--<td class="col-md-2"><button type="button" value="{{{ $pp->ProjectID}}}">-</button></td>-->
 							<tr>
 					@endforeach
 				</tbody>
@@ -122,6 +122,12 @@
 				<label>
 					<input id="ppInp2" type="radio" name="PreferProjects" value="1" {{{ (($student->PreferProjects == 1)? "checked": "") }}}>
 					Prefer to work on listed projects
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input id="ppInp3" type="radio" name="PreferProjects" value="2" {{{ (($student->PreferProjects == 2)? "checked": "") }}}>
+					No Preference
 				</label>
 			</div>
 			

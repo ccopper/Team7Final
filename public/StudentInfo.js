@@ -15,6 +15,7 @@ $( document ).ready(function()
 	$("#oiInp").change(updateSI);
 	$("#ppInp1").change(updateSI);
 	$("#ppInp2").change(updateSI);
+	$("#ppInp3").change(updateSI);
 	
 	$("#majInp").on('input', showUnsaved);
 	$("#minInp").on('input', showUnsaved);
@@ -33,7 +34,7 @@ $( document ).ready(function()
 	$("#newAvoid").on('input', findStudents);
 	
 	$("#PrePartList").on("click", "button" , unPreferStudent);
-	$("#AvoidPartList").on("click", "button" , unPreferStudent);
+	$("#AvoidPartList").on("click", "button" , unAvoidStudent);
 	
 	$("#addProject").on("click", addProject);
 });
@@ -129,7 +130,7 @@ function preferStudent_success(respData)
 	$("#PrePartList").append(
 		"<tr id=\"P" + respData.CWID + "\">" +
 		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
-		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td></tr>"
+		"<td class=\"col-md-2\"><button type=\"button\" value=\""+ respData.CWID +"\">-</button></td></tr>"
 	);
 }
 
@@ -153,7 +154,7 @@ function avoidStudent_success(respData)
 	$("#AvoidPartList").append(
 		"<tr id=\"P" + respData.CWID + "\">" +
 		"<td class=\"col-md-10\">" + respData.FirstName + " " + respData.LastName + "</td>" +
-		"<td class=\"col-md-2\"><button type=\"button\" class=\"btn btn-primary\" value=\""+ respData.CWID +"\">-</button></td></tr>"
+		"<td class=\"col-md-2\"><button type=\"button\" value=\""+ respData.CWID +"\">-</button></td></tr>"
 	);
 }
 
@@ -214,8 +215,8 @@ function addProject_success(respData)
 		$("#PreProjList").append(
 			"<tr>" +
 			"<td class=\"col-md-2\">" + respData[v].pivot.Priority + "</td>" +
-			"<td class=\"col-md-8\">" + respData[v].Company + " " + respData[v].ProjectName + "</td>" +
-			"<td class=\"col-md-2\"><button type=\"button\" value=\""+ respData[v].ProjectID +"\">-</button></td>"+
+			"<td class=\"col-md-10\">" + respData[v].Company + " " + respData[v].ProjectName + "</td>" +
+			//"<td class=\"col-md-2\"><button type=\"button\" value=\""+ respData[v].ProjectID +"\">-</button></td>"+
 			"</tr>"
 		);
 	}
