@@ -35,6 +35,7 @@ class BuildSchema extends Migration {
 			$table->integer('PreferProjects')->default(1);
 			$table->integer('ProjectID')->nullable();
 			
+			
 			$table->primary('CWID');
 		});
 		Schema::create('Students_Projects', function($table)

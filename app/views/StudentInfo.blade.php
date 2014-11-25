@@ -1,6 +1,6 @@
 @extends('master')
 @section('include')
-	{{ HTML::style('StudentInfo.css') }}
+	{{ HTML::style('Style.css') }}
     {{ HTML::script('StudentInfo.js') }}
 @stop
 @section('header')
@@ -18,6 +18,14 @@
 			<br>
 			{{{ $student->EMail }}}
 			<br><br>
+			Assigned Project:
+			<br>			
+			@if(isset($student->Assignment->id))
+				<a href="{{URL::to('/Project/' . $student->Assignment->id) }} "> {{{ $student->Assignment->ProjectName }}}</a>
+			@else
+				None
+			@endif
+			<br>
 			Major: <input id="majInp" type="text" name="Major" class="form-control" value="{{{ $student->Major }}}"></input>
 			<br>
 			Minor: <input id="minInp" type="text" name="Minor" class="form-control" value="{{{ $student->Minor }}}"></input>
@@ -53,7 +61,7 @@
 			<div class="row">
 
 				<input id="newPre" type="text" name="NewPre" class="form-control"></input>
-				<div id="PreferSuggest" class="SuggestList">
+				<div id="PreferSuggest" class="suggestList">
 					<ul id="PreferSuggestUL" class="list-unstyled" style="margin: 10px"></ul>
 				</div>
 			</div>
@@ -74,7 +82,7 @@
 			<div class="row">
 
 				<input id="newAvoid" type="text" name="newAvoid" class="form-control"></input>
-				<div id="AvoidSuggest" class="SuggestList" >
+				<div id="AvoidSuggest" class="suggestList" >
 					<ul class="list-unstyled" style="margin: 10px"></ul>
 				</div>
 			</div>

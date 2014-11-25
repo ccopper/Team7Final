@@ -1,13 +1,18 @@
 
 
-.SuggestList
+.suggestList
 {
 	display: none; 
 	border: 1px solid black;
 }
 
-.SuggestList li:hover
+.suggestList li:hover
 {
 	background-color: #DDDDDD;
 	cursor: pointer;
+}
+
+.unassigned
+{
+	background-color: #FF3300;
 }
