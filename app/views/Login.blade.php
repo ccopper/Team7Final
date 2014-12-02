@@ -1,8 +1,6 @@
 @extends('master')
 @section('header')
-	<h2>
-		Login
-	</h2>
+	Login
 @stop
 @section('content')
 	<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">

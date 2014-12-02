@@ -4,9 +4,9 @@
 	{{ HTML::script('Project.js') }}
 @stop
 @section('header')
-	<h2>
-		Administration
-	</h2>
+	
+	Project Info
+	
 @stop
 @section('content')
 	<span id="ProjectID" style="display: none">{{{ $project->id }}}</span>

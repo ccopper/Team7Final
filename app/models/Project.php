@@ -11,6 +11,8 @@ class Project extends Eloquent
 	{
 		return $this->hasMany('Student', 'ProjectID', 'id');
 	}
+
+	
 }
 
 ?>

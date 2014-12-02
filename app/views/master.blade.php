@@ -20,7 +20,20 @@
 		<div class="container">
 			<div class="page-header">
 				<h2>CSCI 370 Registration</h2>
-				@yield('header')
+				<nav class="navbar navbar-default" role="navigation">
+				<div class="collapse navbar-collapse">
+					<p class="navbar-text" style="font-size:1.4em"> @yield('header')</p>
+						
+						@if(Auth::check())
+							<a href="{{URL::to('/Logout')}}" class="btn btn-default navbar-right navbar-btn">Log Out</a>
+							@if(Auth::user()->PermissionLevel < 2)
+								<a href="{{URL::to('/Student/Info')}}" class="btn btn-default navbar-right navbar-btn">My Info</a>
+							@else
+								<a href="{{URL::to('/Admin')}}" class="btn btn-default navbar-right navbar-btn">Admin</a>
+							@endif
+						@endif
+				</div>	
+				</nav>
 			</div>
 			<div class="content">
 				@yield('content')

@@ -4,11 +4,12 @@
 	{{ HTML::script('Admin.js') }}
 @stop
 @section('header')
-	<h2>
-		Administration
-	</h2>
+
+	Administration
+
 @stop
 @section('content')
+
 	
 	<div class="row">
 		<div class="col-md-4">
@@ -27,7 +28,7 @@
 			<div class="row">
 				Group Assignments:<br>
 				<div class="col-md-6 col-md-offset-3">
-					<a href="{{URL::to('/TeamView')}}">View Current Teams</a>
+					<a href="{{URL::to('/Project/TeamView')}}">View Current Teams</a>
 				</div>
 				<br>
 				<div class="col-md-8 col-md-offset-2">
@@ -47,6 +48,19 @@
 			<div class="row col-md-4 col-md-offset-4">
 					<button type="button" class="btn btn-primary" id="studentView">View Student</button>
 			</div>
+			<br><br>
+			<div id="quickView" class='quickView row'>
+				<span id="qvName"></span><br>
+				<span id="qvEMail"></span><br>
+				Major:<span id="qvMajor"></span> Minor:<span id="qvMinor"></span><br>
+				OtherInfo: <span id="qvOtherInfo"></span><br>
+				<table class="table table-condensed">
+					<caption>Preferred Projects</caption>
+					<tbody id="PreProjList">
+	
+					</tbody>
+				</table>
+			</div>
 		</div>
 		<div class="col-md-5">
 			Project List:
@@ -61,4 +75,5 @@
 			</div>
 		</div>
 	</div>
+
 @stop

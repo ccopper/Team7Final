@@ -16,3 +16,16 @@
 {
 	background-color: #FF3300;
 }
+
+.vDropTarget
+{
+	background-color: #66FF33;
+}
+
+.quickView
+{
+	display:none;
+	border: 1px solid black;
+	padding:10px;
+	background-color: white;
+}

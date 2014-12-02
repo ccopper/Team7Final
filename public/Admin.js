@@ -25,10 +25,49 @@ $( document ).ready(function()
 	$("#projectFile").on("change", uploadProjectFile);
 	
 	$('#genAssign').on('click', genAssign);
+	$('#studentList').on('click', 'option', quickViewStudent);
+	//$('#studentList').on('mouseleave', 'option', unQuickViewStudent);
 });
 
+function unQuickViewStudent(e)
+{
+	$("#quickView").hide();
+}
 
 
+function quickViewStudent(e)
+{
+	$("#quickView").show();
+	$.ajax({
+		type: 'get',
+        url: "Admin/QVStudent/" + $(this).val(),
+		dataType: "json",
+		success: quickViewStudent_success,
+		error: ajaxError
+		
+	});
+}
+
+function quickViewStudent_success(resp)
+{
+	console.log(resp);
+	$("#qvName").text(resp.Student.FirstName + " " + resp.Student.LastName);
+	$("#qvEMail").text(resp.Student.EMail);
+	$("#qvMajor").text(resp.Student.Major);
+	$("#qvMinor").text(resp.Student.Minor);
+	$("#qvOtherInfo").text(resp.Student.OtherInfo);
+	
+	for(var v in resp.Projects)
+	{
+		$("#PreProjList").append(
+			"<tr>" +
+			"<td>" + resp.Projects[v].pivot.Priority + "</td>" +
+			"<td>" + resp.Projects[v].ProjectName + "</td>" +
+			"</tr>"
+		);
+	}
+	
+}
 
 function uploadStudentFile(e)
 {

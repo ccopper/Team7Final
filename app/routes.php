@@ -36,6 +36,13 @@ Route::post('/Login', function()
 		return View::make('Login');
 	}
 });
+Route::get('/Logout', function()
+{
+	Auth::logout();
+
+	return View::make('Login');
+
+});
 
 Route::get('/Student/Info/{id?}', function($id = null)
 {
@@ -68,7 +75,7 @@ Route::get('/Admin', function()
 	
 	return View::make('Admin')->with('students', Student::All())->with('projects', Project::All());;
 });
-Route::get('/TeamView', function()
+Route::get('/Project/TeamView', function()
 {
 	if(!Auth::check() || Auth::user()->PermissionLevel < 2) 
 	{
@@ -309,6 +316,26 @@ Route::get('/Project/UnAssign/{id}', function($id)
 	
 	return $s->toJson();
 	
+});
+
+Route::get('/Admin/QVStudent/{id}', function($id)
+{
+	$s = Student::find($id);
+	
+	if(! (Auth::check())) 
+	{
+		return "{ \"errCode\": 1 }";
+	} 
+	if(Auth::user()->PermissionLevel < 2)
+	{
+		return "{ \"errCode\": 2 }";
+	}
+	
+	$res = Array();
+	$res["Student"] = $s;
+	$res["Projects"] = $s->ProjectSelections()->get()->toArray();
+	
+	return json_encode($res);
 });
 
 Route::post('/Admin/StudentFile', function()

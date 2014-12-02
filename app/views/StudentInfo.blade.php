@@ -2,15 +2,23 @@
 @section('include')
 	{{ HTML::style('Style.css') }}
     {{ HTML::script('StudentInfo.js') }}
+	@if(Auth::user()->PermissionLevel >= 2)
+	<script>
+		$("form").ready(function()
+		{
+			$('input').prop("disabled", true);
+			$('textarea').prop("disabled", true);
+			$('select').prop("disabled", true);
+		});
+	</script>
+	@endif
 @stop
 @section('header')
-	<h2>
-		Student Infomation
-	</h2>
+	Student Infomation
 @stop
 @section('content')
 	<span id="CWID" style="display: none">{{{ $student->CWID }}}</span>
-	
+
 	<div class="row">
 		<div class="col-md-3">
 			<form class=".form-horizontal" action="{{URL::to('/Login')}}" method="post">
