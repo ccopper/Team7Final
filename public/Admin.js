@@ -37,7 +37,7 @@ function unQuickViewStudent(e)
 
 function quickViewStudent(e)
 {
-	$("#quickView").show();
+	//$("#quickView").show();
 	$.ajax({
 		type: 'get',
         url: "Admin/QVStudent/" + $(this).val(),
@@ -50,9 +50,51 @@ function quickViewStudent(e)
 
 function quickViewStudent_success(resp)
 {
+	$("#quickView").show();
 	console.log(resp);
 	$("#qvName").text(resp.Student.FirstName + " " + resp.Student.LastName);
 	$("#qvEMail").text(resp.Student.EMail);
+	$("#qvAssigned").text((resp.Assignment)?resp.Assignment.ProjectName: "None");
+	$("#qvMajor").text(resp.Student.Major);
+	$("#qvMinor").text(resp.Student.Minor);
+	$("#qvOtherInfo").text(resp.Student.OtherInfo);
+	
+	for(var v in resp.Projects)
+	{
+		$("#PreProjList").append(
+			"<tr>" +
+			"<td>" + resp.Projects[v].pivot.Priority + "</td>" +
+			"<td>" + resp.Projects[v].ProjectName + "</td>" +
+			"</tr>"
+		);
+	}
+	
+}function unQuickViewStudent(e)
+{
+	$("#quickView").hide();
+}
+
+
+function quickViewStudent(e)
+{
+	//$("#quickView").show();
+	$.ajax({
+		type: 'get',
+        url: "Admin/QVStudent/" + $(this).val(),
+		dataType: "json",
+		success: quickViewStudent_success,
+		error: ajaxError
+		
+	});
+}
+
+function quickViewStudent_success(resp)
+{
+	$("#quickView").show();
+	console.log(resp);
+	$("#qvName").text(resp.Student.FirstName + " " + resp.Student.LastName);
+	$("#qvEMail").text(resp.Student.EMail);
+	$("#qvAssigned").text((resp.Assignment)?resp.Assignment.ProjectName: "None");
 	$("#qvMajor").text(resp.Student.Major);
 	$("#qvMinor").text(resp.Student.Minor);
 	$("#qvOtherInfo").text(resp.Student.OtherInfo);
@@ -111,7 +153,7 @@ function uploadProjectFile(e)
 	});
 	$.ajax({
 		type: 'POST',
-        url: "GenAssign",
+        url: "Admin/ProjectFile",
 		data: data,
 		dataType: "json",
 		cache: false,

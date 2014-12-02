@@ -1,5 +1,10 @@
 
 
+table tr:hover
+{
+	cusor: pointer;
+}
+
 .suggestList
 {
 	display: none; 
@@ -17,10 +22,16 @@
 	background-color: #FF3300;
 }
 
+.vDragSelection
+{
+	background-color: #FF3300;
+}
+
 .vDropTarget
 {
 	background-color: #66FF33;
 }
+
 
 .quickView
 {
@@ -29,3 +40,5 @@
 	padding:10px;
 	background-color: white;
 }
+
+

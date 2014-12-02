@@ -318,7 +318,7 @@ Route::get('/Project/UnAssign/{id}', function($id)
 	
 });
 
-Route::get('/Admin/QVStudent/{id}', function($id)
+function qvStudent($id)
 {
 	$s = Student::find($id);
 	
@@ -333,10 +333,16 @@ Route::get('/Admin/QVStudent/{id}', function($id)
 	
 	$res = Array();
 	$res["Student"] = $s;
+	$res["Assignment"] = $s->Assignment;
+	$res["Preferred"] = $s->PrePartners()->get()->toArray();
+	$res["Avoid"] = $s->AvoidPartners()->get()->toArray();
 	$res["Projects"] = $s->ProjectSelections()->get()->toArray();
 	
 	return json_encode($res);
-});
+}
+
+Route::get('/Project/QVStudent/{id}',function($id) { return qvStudent($id); });
+Route::get('/Admin/QVStudent/{id}', function($id) { return qvStudent($id); });
 
 Route::post('/Admin/StudentFile', function()
 {
@@ -411,15 +417,15 @@ Route::post('/Admin/ProjectFile', function()
 
 Route::get('/Admin/GenAssign', function()
 {
+
 	if(!Auth::check() || Auth::user()->PermissionLevel < 2) 
 	{
 		return "{ \"errCode\": 1 }";
 	}
-	//$s = Student::find(772233);
-	//$p = Project::find(21);
+	$s = Student::find(120978);
+	$p = Project::find(1);
 	
-//	return "F:".calcAvoid($s, $p);
-	
+	//return calcAvoid($s, $p);
 	//Remove all existing assignments
 	DB::statement("UPDATE Students SET ProjectID = NULL");
 	
@@ -433,11 +439,19 @@ Route::get('/Admin/GenAssign', function()
 	});
 	//Process Partner Preference People	
 	$unStu = Student::whereNull('ProjectID')->where('PreferProjects', '=', '0')->orderByRaw("RAND()")->get();
-	
-	$unStu->each(function($s)
+
+	$res = "Test2";
+	foreach($unStu as $s)
 	{
 		assignViaPartner($s);
+	}
+
+/*	$unStu->each(function($s)
+	{
+		$res = assignViaPartner($s);
 	});
+	*/
+	//return $res;
 	$unStu = Student::whereNull('ProjectID');
 	
 	DB::statement("UPDATE Students SET ProjectID = null WHERE ProjectID = -1");
@@ -467,7 +481,7 @@ Route::get('/Admin/GenAssign', function()
 	});
 	
 	
-	return "{ \"errCode\": 5 }";
+	return "{ \"errCode\": 0 }";
 });
 
 function assignViaProject($s, $isNew = true)
@@ -495,20 +509,30 @@ function assignViaPartner($s)
 	$minP = null;
 	foreach($s->PrePartners as $friend)
 	{
-		$A = calcAvoid($s, $friend->Assignment());
+		if(!isset($friend->ProjectID))
+		{	
+			continue;
+		}
+		//return $friend->Assignment->toJson();
+		$A = calcAvoid($s, $friend->Assignment);
 		if($A == 0)
-			if(attemptAssign($s, $friend->Assignment()))
+		{
+			if(attemptAssign($s, $friend->Assignment))
+			{
 				break;
+			}
+		}
 		else
 		{
 			if($minA > $A)
 			{
 				$minA = $A;
-				$minP = $friend->Assignment();
+				$minP = $friend->Assignment;
 			}
 		}
 	}
-	if(!isset($s->ProjectID))
+
+	if(!isset($s->ProjectID) && isset($minP))
 	{
 		attemptAssign($s, $minP);
 	}

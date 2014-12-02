@@ -50,10 +50,13 @@
 			</div>
 			<br><br>
 			<div id="quickView" class='quickView row'>
-				<span id="qvName"></span><br>
+				<b><span id="qvName"></span></b><br>
 				<span id="qvEMail"></span><br>
-				Major:<span id="qvMajor"></span> Minor:<span id="qvMinor"></span><br>
+				Assigned To: <span id="qvAssigned"> </span><br>
+				Major:<span id="qvMajor"></span><br>
+				Minor:<span id="qvMinor"></span><br>
 				OtherInfo: <span id="qvOtherInfo"></span><br>
+				
 				<table class="table table-condensed">
 					<caption>Preferred Projects</caption>
 					<tbody id="PreProjList">
